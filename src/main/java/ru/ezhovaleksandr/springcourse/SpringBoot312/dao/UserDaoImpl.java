@@ -18,8 +18,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-        TypedQuery<User> query = entityManager.createQuery("from User", User.class);
-        return query.getResultList();
+        return entityManager.createQuery("from User", User.class).getResultList();
     }
 
     @Override
@@ -34,10 +33,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void update(User user) {
-        getById(user.getId()).setName(user.getName());
-        getById(user.getId()).setAge(user.getAge());
-        getById(user.getId()).setEmail(user.getEmail());
-        entityManager.merge(getById(user.getId()));
+        entityManager.merge(user);
     }
 
     @Override
